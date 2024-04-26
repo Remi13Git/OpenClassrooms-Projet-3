@@ -15,9 +15,9 @@
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li><a href="index.html#portfolio">projets</a></li>
+			<li><a href="index.html#contact">contact</a></li>
+			<li><a href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -35,52 +35,9 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
+		<h2>Mes projets</h2>
+		<div class="filter" id="filter"></div> <!-- ID pour récupérer les catégories dans la database -->
+		<div class="gallery" id="works-container"> <!-- ID pour récupérer les images/titres dans la database -->
 		</div>
 	</section>
 	<section id="contact">
@@ -105,5 +62,115 @@
 		</ul>
 	</nav>
 </footer>
+<script>
+	fetch('http://localhost:5678/api/categories')
+	  /* Transformer la requete en json */
+	  .then(response => response.json()) 
+	  .then(categories => {
+		/* Récupérer l'ID parent filter */
+		const categoriesContainer = document.getElementById('filter');
+
+		/* Création du bouton "Tous" */
+		const allButton = document.createElement('button');
+		allButton.textContent = 'Tous';
+		allButton.addEventListener('click', () => {
+			showAllWorks(); /* Au clic, on appele la fonction showAllWorks */
+			/* On supprime activ-category des autres boutons */
+			const allButtons = document.querySelectorAll('#filter button');
+			allButtons.forEach(btn => {
+				btn.classList.remove('activ-category');
+			});
+			/* Au clic, on ajoute la classe "active-category" */
+			allButton.classList.add('activ-category');
+		});
+		categoriesContainer.appendChild(allButton); 
+
+		/* Pour chaque "categories" on récupére sa donnée "name" */
+		categories.forEach(categorie => {  
+		  /* On crée un container div pour contenir le bouton */
+		  const categorieElement = document.createElement('div');
+
+		  /* On insère le nom dans un button et on lui attribut sa categorieID */
+		  categorieElement.innerHTML = `
+		  <button category-id="${categorie.id}">${categorie.name}</button>
+		  `;
+
+		  /* On ajoute un gestionnaire d'événements pour le clic sur chaque bouton */
+		  const button = categorieElement.querySelector('button');
+		  button.addEventListener('click', () => {
+			const categoryId = button.getAttribute('category-id');  /* On récupère le category-id de l'élément cliqué */
+			showCategorie(categoryId); /* Au clic, on appele la fonction showCategorie en associant le category-id récupéré juste avant */
+
+			  /*  Au clic, on retirer la classe "active-category" de tous les boutons */
+			  const allButtons = document.querySelectorAll('#filter button');
+			  allButtons.forEach(btn => {
+			  btn.classList.remove('activ-category');
+			  });
+			/* Puis on ajoute la classe "active-category" à celui séléctionné */
+			button.classList.add('activ-category');
+		
+		  });
+		  
+		  /* On intègre l'enfant "categorieElement" au container "categoriesContainer" */
+		  categoriesContainer.appendChild(categorieElement);
+		  
+		});
+	  })
+	  .catch(error => {
+		/* Récupérer l'erreur et l'afficher dans la console */
+		console.error('Erreur lors de la récupération des catégories :', error);
+	  });
+</script>
+<script>
+	fetch('http://localhost:5678/api/works')
+	  /* Transformer la requete en json */
+	  .then(response => response.json()) 
+	  .then(works => {
+		/* Récupérer l'id parent works-container */
+		const worksContainer = document.getElementById('works-container'); 
+		/* Pour chaque "works" on récupére ses données "imageUrl" et "title" */
+		works.forEach(work => {  
+		  /* On crée un container figure pour contenir image + titre */
+		  const workElement = document.createElement('figure');
+
+		  /* On récupère le categoryId et on l'ajoute comme attribut au figure parent */
+		  workElement.setAttribute('data-category-id', work.categoryId)
+
+		  /* On insère l'image et le titre */
+		  workElement.innerHTML = `
+			<img src="${work.imageUrl}" alt="${work.title}">
+			<figcaption>${work.title}</figcaption>
+		  `;
+
+		  /* On intègre l'enfant "workElement" au container "worksContainer" */
+		  worksContainer.appendChild(workElement);
+		});
+	  })
+	  .catch(error => {
+		/* Récupérer l'erreur et l'afficher dans la console */
+		console.error('Erreur lors de la récupération des titres et des images :', error);
+	  });
+</script>
+<script>
+	function showAllWorks() {
+		/* Fonction pour tout afficher */
+		const workElements = document.querySelectorAll('#works-container figure');
+		workElements.forEach(workElement => {
+			workElement.style.display = 'block';
+		});
+	}
+
+	function showCategorie(categoryId) {
+		const workElements = document.querySelectorAll('#works-container figure');
+		workElements.forEach(workElement => {
+			const workCategoryId = workElement.getAttribute('data-category-id');
+			if (workCategoryId === categoryId) {
+				workElement.style.display = 'block';
+			} else {
+				workElement.style.display = 'none';
+			}
+			});
+	}
+</script>
 </body>
 </html>
