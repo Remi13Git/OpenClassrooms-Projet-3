@@ -3,6 +3,10 @@
    License: none (public domain)
 */
 
+html {
+    scroll-behavior: smooth;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -150,6 +154,11 @@ input[type="submit"]{
     text-align: center;
     text-decoration: underline;
     cursor: pointer;
+	color: #3D3D3D;
+}
+#login a:visited {
+    text-decoration: none;
+	color: #3D3D3D;
 }
 #login p {
     text-align: center;
