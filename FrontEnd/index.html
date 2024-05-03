@@ -7,17 +7,20 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" >
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+	<a href="index.html"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
 	<nav>
 		<ul>
 			<li><a href="index.html#portfolio">projets</a></li>
 			<li><a href="index.html#contact">contact</a></li>
-			<li><a href="login.html">login</a></li>
+			<li><a href="login.html" id="login-nav">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -35,10 +38,11 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes projets</h2>
-		<div class="filter" id="filter"></div> <!-- ID pour récupérer les catégories dans la database -->
-		<div class="gallery" id="works-container"> <!-- ID pour récupérer les images/titres dans la database -->
+		<div class="title-container">
+			<h2>Mes projets</h2>
 		</div>
+		<div class="filter" id="filter"></div> <!-- ID pour récupérer les catégories dans la database -->
+		<div class="gallery" id="works-container"></div> <!-- ID pour récupérer les images/titres dans la database -->
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>
@@ -54,6 +58,50 @@
 		</form>
 	</section>
 </main>
+
+<aside id="modal" style="display: none;">
+	<div class="modal-container">
+		<div id="modal-content-first" class="modal-content">
+			<div class="close-container">
+				<i class="fa-solid fa-close close-modal"></i>
+			</div>
+			<p id="test">Galerie photo</p>
+			<div id="galery-preview" class="galery-preview"></div> <!-- ID pour récupérer les aperçues dans la database -->
+			<div class="separator"></div>
+			<button id="js-next-modal">Ajouter une photo</button>
+		</div>
+		<div id="modal-content-second" class="modal-content" style="display: none;">
+			<div class="icon-container">
+				<i class="fa-solid fa-arrow-left" id="js-previous-modal"></i>
+				<i class="fa-solid fa-close close-modal"></i>
+			</div>
+			<p>Ajout photo</p>
+			<div class="add-picture">
+				<i class="fa-regular fa-image"></i>
+				<button class="add-picture-button">+ Ajouter photo</button>
+				<input class="add-picture-input" type="file" id="fileInput" accept="image/*" size="4194304">
+				<p>jpg, png : 4mo max</p>
+			</div>
+			<div class="input-title">
+				<label for="title">Titre</label>
+				<input type="text" name="title" id="title">
+			</div>
+			<div class="select-category">
+				<label for="category">Catégorie</label>
+				<select name="category" id="category">
+					<option value="" disabled selected hidden></option>
+					<option value="1">Objets</option>
+					<option value="2">Appartements</option>
+					<option value="3">Hotel & restaurants</option>
+				</select>
+			</div>
+			<div class="separator"></div>
+			<button id="js-submit-new" onclick="addWorks()">Valider</button>
+		</div>
+	</div>
+</aside>
+
+
 
 <footer>
 	<nav>
