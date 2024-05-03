@@ -64,3 +64,15 @@
     inputFields.forEach(inputField => {
         inputField.addEventListener('input', hideWrongPassword);
     });
+
+/* ----- LOGIN/LOGOUT ----- */
+
+    const loginNav = document.getElementById('login-nav');
+    
+    const checkToken = localStorage.getItem('token');
+    
+    if (checkToken) {
+        loginNav.textContent = 'logout';
+    } else {
+        loginNav.textContent = 'login';
+    }
