@@ -369,9 +369,6 @@ loginNav.addEventListener('click', function() {
         /* Transformer login en logout */
         loginNav.textContent = 'logout';
 
-        /* Cacher le filtre */
-        filter.style.display = 'none';
-
         /* Ajouter barre d'édition */
         header.style.marginTop = "100px"
         const addEditBar = document.createElement('div');
@@ -406,6 +403,10 @@ loginNav.addEventListener('click', function() {
 			firstModal.style.display = 'flex';
 		});
 		addEditContentI.addEventListener('click', () => {
+			editModal.style.display = 'flex';
+			firstModal.style.display = 'flex';
+		});
+		addEditContentP.addEventListener('click', () => {
 			editModal.style.display = 'flex';
 			firstModal.style.display = 'flex';
 		});
@@ -672,3 +673,18 @@ function previewImage(event) {
 	};
 	reader.readAsDataURL(event.target.files[0]);
 }
+
+ // **************REDIRECTION VERS LA SECTION CONTACT DANS LE LIEN DU LOGIN EN SCROLLING********************
+ document.addEventListener("DOMContentLoaded", () => {
+	const sectionToScroll = window.location.hash.substring(1);
+	if (sectionToScroll) {
+	  setTimeout(function () {
+		const targetSection = document.getElementById(sectionToScroll);
+		if (targetSection) {
+		  window.scrollTo({
+			top: targetSection.offsetTop,
+		  });
+		}
+	  }, 100);
+	}
+  });

@@ -241,6 +241,9 @@ footer nav ul {
 	color: white;
 	cursor: pointer;
 }
+.edit-bar p {
+	cursor: pointer;
+}
 .title-container {
 	display: flex;
 	justify-content: center;
