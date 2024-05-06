@@ -20,7 +20,7 @@
 		<ul>
 			<li><a href="index.html#portfolio">projets</a></li>
 			<li><a href="index.html#contact">contact</a></li>
-			<li><a href="login.html" id="login-nav">login</a></li>
+			<li><a href="#" id="login-nav">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -59,50 +59,6 @@
 	</section>
 </main>
 
-<aside id="modal" style="display: none;">
-	<div class="modal-container">
-		<div id="modal-content-first" class="modal-content">
-			<div class="close-container">
-				<i class="fa-solid fa-close close-modal"></i>
-			</div>
-			<p id="test">Galerie photo</p>
-			<div id="galery-preview" class="galery-preview"></div> <!-- ID pour récupérer les aperçues dans la database -->
-			<div class="separator"></div>
-			<button id="js-next-modal">Ajouter une photo</button>
-		</div>
-		<div id="modal-content-second" class="modal-content" style="display: none;">
-			<div class="icon-container">
-				<i class="fa-solid fa-arrow-left" id="js-previous-modal"></i>
-				<i class="fa-solid fa-close close-modal"></i>
-			</div>
-			<p>Ajout photo</p>
-			<div class="add-picture">
-				<i class="fa-regular fa-image"></i>
-				<button class="add-picture-button">+ Ajouter photo</button>
-				<input class="add-picture-input" type="file" id="fileInput" accept="image/*" size="4194304">
-				<p>jpg, png : 4mo max</p>
-			</div>
-			<div class="input-title">
-				<label for="title">Titre</label>
-				<input type="text" name="title" id="title">
-			</div>
-			<div class="select-category">
-				<label for="category">Catégorie</label>
-				<select name="category" id="category">
-					<option value="" disabled selected hidden></option>
-					<option value="1">Objets</option>
-					<option value="2">Appartements</option>
-					<option value="3">Hotel & restaurants</option>
-				</select>
-			</div>
-			<div class="separator"></div>
-			<button id="js-submit-new" onclick="addWorks()">Valider</button>
-		</div>
-	</div>
-</aside>
-
-
-
 <footer>
 	<nav>
 		<ul>
@@ -110,6 +66,6 @@
 		</ul>
 	</nav>
 </footer>
-<script src="/FrontEnd/scripts/index.js"></script>
+<script src="./scripts/index.js"></script>
 </body>
 </html>
