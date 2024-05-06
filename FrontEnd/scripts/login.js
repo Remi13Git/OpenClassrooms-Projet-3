@@ -68,7 +68,6 @@
 /* ----- LOGIN/LOGOUT ----- */
 
     const loginNav = document.getElementById('login-nav');
-    
     const checkToken = localStorage.getItem('token');
     
     if (checkToken) {
@@ -76,3 +75,13 @@
     } else {
         loginNav.textContent = 'login';
     }
+
+    loginNav.addEventListener('click', function() {
+        if (loginNav.textContent === 'logout') {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            window.location.reload();
+        } else {
+            window.location.href = "login.html";
+        }
+    });

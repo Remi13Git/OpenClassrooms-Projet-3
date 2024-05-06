@@ -364,6 +364,9 @@ footer nav ul {
 #modal label {
 	margin: 2em 0 1em 0;
 }
+#modal #category select {
+	width: 100%;
+}
 #modal button:disabled {
 	background-color: #a7a7a7;
 	cursor: not-allowed;
@@ -380,6 +383,14 @@ footer nav ul {
 	cursor: pointer;
 	position: relative;
     overflow: hidden;
+}
+#modal .add-preview {
+	width: 74%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #E8F1F6;
 }
 #modal .add-picture .fa-image {
 	font-size: 60px;
@@ -413,4 +424,11 @@ footer nav ul {
 	text-align: center;
     color: red;
 	font-size: 12px;
+}
+#modal form {
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
 }
