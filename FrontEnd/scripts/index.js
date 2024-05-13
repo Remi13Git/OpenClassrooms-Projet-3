@@ -369,6 +369,9 @@ loginNav.addEventListener('click', function() {
         /* Transformer login en logout */
         loginNav.textContent = 'logout';
 
+		/* Cacher le filtre */
+		filter.style.display = 'none';
+
         /* Ajouter barre d'édition */
         header.style.marginTop = "100px"
         const addEditBar = document.createElement('div');
